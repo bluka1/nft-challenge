@@ -1,41 +1,87 @@
-import type { NextPage } from 'next'
+import type { GetServerSideProps, NextPage } from 'next'
+import { sanityClient, urlFor } from '../sanity'
 import Head from 'next/head'
 import Image from 'next/image'
+import { Collection } from '../typings'
+import Link from 'next/link'
 
-const Home: NextPage = () => {
+interface Props {
+  collections: Collection[]
+}
+
+const Home = ({ collections }: Props) => {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center space-y-3 border-4 border-solid border-sky-500 bg-gradient-to-br from-cyan-800 to-rose-500 py-2 lg:items-center lg:justify-center lg:space-y-6">
+    <div className="mx-auto flex min-h-screen max-w-7xl flex-col py-20 px-10 2xl:px-0">
       <Head>
         <title>Luka's NFT DROP</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1 className="p-10 text-center text-2xl font-bold text-white lg:mb-20 lg:text-4xl">
-        WELCOME TO LUKA'S NFT DROP CHALLENGE MADE THROUGH #PAPACHALLENGE
+      <h1 className="mb-10 text-4xl font-extralight">
+        <span className="font-extrabold underline decoration-pink-600/50">
+          Luka's
+        </span>{' '}
+        NFT Market Place
       </h1>
 
-      <Image src="/nft.svg" alt="nft" width={400} height={200} />
-
-      <h5 className="p-10 text-center font-bold text-white lg:pt-20">
-        PLEASE CHOOSE WHAT WOULD YOU LIKE TO DO ON THIS SITE:
-      </h5>
-
-      <div className="flex p-5 lg:p-0">
-        <a
-          href="/whatsnft"
-          className="to-white-500 mr-2 rounded-full bg-gradient-to-br from-purple-800 to-red-800 py-4 px-2 font-bold text-white hover:animate-pulse"
-        >
-          Learn more about NFT
-        </a>
-        <a
-          href="/nft/luka"
-          className="text-purple ml-2 rounded-full bg-gradient-to-br from-purple-800 to-red-800 py-4 px-2 font-bold text-white hover:animate-pulse"
-        >
-          GRAB SOME NFT :)
-        </a>
-      </div>
+      <main className="bg-slate-100 p-10 shadow-xl shadow-rose-400/20 ">
+        <div className="grid space-x-3 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+          {collections.map((collection) => (
+            <Link href={`/nft/${collection.slug.current}`}>
+              <div className="flex cursor-pointer flex-col items-center transition-all duration-200 hover:scale-105">
+                <img
+                  className="h-96 w-60 rounded-2xl object-cover"
+                  src={urlFor(collection.mainImage).url()}
+                  alt=""
+                />
+                <div className="p-5">
+                  <h2 className="text-3xl">{collection.title}</h2>
+                  <p className="mt-2 text-sm text-gray-400">
+                    {collection.description}
+                  </p>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </main>
     </div>
   )
 }
 
 export default Home
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const query = `*[_type == "collection"]{
+    _id,
+    title,
+    address,
+    description,
+    nftCollectionName,
+    mainImage {
+      asset
+    },
+    previewImage {
+      asset
+    },
+    slug {
+      current
+    },
+    creator -> {
+      _id,
+      name,
+      address,
+      slug {
+        current
+      }
+    }
+  }`
+
+  const collections = await sanityClient.fetch(query)
+
+  return {
+    props: {
+      collections,
+    },
+  }
+}
