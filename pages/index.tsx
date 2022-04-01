@@ -10,8 +10,8 @@ interface Props {
 
 const Home = ({ collections }: Props) => {
   return (
-    <div className="min-w-screen min-h-screen bg-zinc-800 py-10">
-      <div className="min-h-90 mx-auto flex max-w-7xl flex-col items-center justify-center rounded-2xl bg-gradient-to-b from-sky-500 to-yellow-400 py-20 px-10 lg:bg-gradient-to-r 2xl:px-0">
+    <div className="min-w-screen min-h-screen bg-gradient-to-b from-zinc-600 to-zinc-900 px-10 py-10 lg:bg-gradient-to-r">
+      <div className="min-h-90 mx-auto flex max-w-7xl flex-col items-center justify-center rounded-2xl border-4 border-rose-700/20 bg-gradient-to-b from-sky-500 to-yellow-400 py-20 px-10 lg:bg-gradient-to-r 2xl:px-0">
         <Head>
           <title>Luka's NFT DROP</title>
           <link rel="icon" href="/favicon.ico" />
