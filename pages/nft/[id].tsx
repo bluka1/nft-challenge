@@ -20,7 +20,7 @@ function NFTDropPage({ collection }: Props) {
     <div className="flex h-screen flex-col lg:grid lg:grid-cols-10">
       {/* LEFT */}
 
-      <div className="bg-gradient-to-br from-cyan-800 to-rose-500 lg:col-span-4">
+      <div className="bg-gradient-to-b from-indigo-500 to-sky-500 lg:col-span-4 lg:bg-gradient-to-r">
         <div className="flex flex-col items-center justify-center py-2 lg:min-h-screen ">
           <div className="rounded-xl bg-gradient-to-br from-yellow-400 to-purple-600 p-2">
             <img
@@ -39,7 +39,7 @@ function NFTDropPage({ collection }: Props) {
       </div>
 
       {/* RIGHT */}
-      <div className="flex flex-1 flex-col p-12 lg:col-span-6">
+      <div className="flex flex-1 flex-col bg-gradient-to-b from-sky-500 to-yellow-400 p-12 lg:col-span-6 lg:bg-gradient-to-r ">
         {/* HEADER */}
         <header className="flex items-center justify-between">
           <Link href={'/'}>
@@ -78,7 +78,7 @@ function NFTDropPage({ collection }: Props) {
           <h1 className="text-3xl font-bold lg:text-5xl lg:font-extrabold">
             {collection.title}
           </h1>
-          <p className="pt-2 text-xl text-green-500">13/21 NFT's claimed</p>
+          <p className="pt-2 text-xl text-indigo-800">13/21 NFT's claimed</p>
         </div>
 
         {/* BUTTON */}
