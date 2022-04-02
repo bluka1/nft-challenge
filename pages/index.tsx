@@ -10,21 +10,21 @@ interface Props {
 
 const Home = ({ collections }: Props) => {
   return (
-    <div className="min-w-screen min-h-screen bg-gradient-to-b from-zinc-600 to-zinc-900 px-10 py-10 lg:bg-gradient-to-r">
-      <div className="min-h-90 mx-auto flex max-w-7xl flex-col items-center justify-center rounded-2xl border-4 border-rose-700/20 bg-gradient-to-b from-sky-500 to-yellow-400 py-20 px-10 lg:bg-gradient-to-r 2xl:px-0">
+    <div className="min-w-screen min-h-screen bg-gradient-to-b from-zinc-700 to-zinc-900 px-10 py-10 lg:bg-gradient-to-r">
+      <div className="min-h-90 mx-auto flex max-w-7xl flex-col items-center justify-center rounded-2xl border-2 border-zinc-900 bg-gray-700 py-20 px-10 2xl:px-0">
         <Head>
           <title>Luka's NFT DROP</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
-        <h1 className="mb-10 text-4xl font-extralight">
-          <span className="font-extrabold underline decoration-pink-600/50">
+        <h1 className="mb-10 text-4xl font-extralight text-white">
+          <span className="font-extrabold underline decoration-zinc-900">
             Luka's
           </span>{' '}
           NFT Market Place
         </h1>
 
-        <main className="bg-gradient-to-b from-sky-500 to-yellow-400 p-10 lg:bg-gradient-to-r ">
+        <main className="bg-gray-700 p-10 ">
           <div className="grid space-x-3 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
             {collections.map((collection) => (
               <Link href={`/nft/${collection.slug.current}`}>
@@ -35,8 +35,10 @@ const Home = ({ collections }: Props) => {
                     alt=""
                   />
                   <div className="p-5">
-                    <h2 className="text-3xl">{collection.title}</h2>
-                    <p className="mt-2 text-sm text-gray-400">
+                    <h2 className="text-center text-3xl text-white">
+                      {collection.title}
+                    </h2>
+                    <p className="mt-2 text-center text-sm text-gray-400">
                       {collection.description}
                     </p>
                   </div>
